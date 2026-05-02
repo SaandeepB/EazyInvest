@@ -1,0 +1,118 @@
+symbol,name,asset_type,sector_or_category,proxy_price,risk_bucket,is_diversified
+AAPL,Apple Inc.,stock,Technology,189.50,high,false
+MSFT,Microsoft Corp.,stock,Technology,415.20,high,false
+NVDA,NVIDIA Corp.,stock,Technology,875.40,high,false
+AMZN,Amazon.com Inc.,stock,Consumer Discretionary,198.60,high,false
+META,Meta Platforms Inc.,stock,Communication Services,512.30,high,false
+GOOGL,Alphabet Inc. Class A,stock,Communication Services,171.80,high,false
+GOOG,Alphabet Inc. Class C,stock,Communication Services,173.10,high,false
+TSLA,Tesla Inc.,stock,Consumer Discretionary,181.20,high,false
+BRKB,Berkshire Hathaway B,stock,Financials,412.60,medium,false
+JPM,JPMorgan Chase & Co.,stock,Financials,198.40,medium,false
+JNJ,Johnson & Johnson,stock,Healthcare,152.30,medium,false
+V,Visa Inc.,stock,Financials,277.40,medium,false
+PG,Procter & Gamble,stock,Consumer Staples,168.40,medium,false
+UNH,UnitedHealth Group,stock,Healthcare,489.20,medium,false
+HD,Home Depot Inc.,stock,Consumer Discretionary,349.80,medium,false
+MA,Mastercard Inc.,stock,Financials,471.30,medium,false
+DIS,Walt Disney Co.,stock,Communication Services,111.90,medium,false
+XOM,Exxon Mobil Corp.,stock,Energy,118.50,medium,false
+CVX,Chevron Corp.,stock,Energy,161.10,medium,false
+ABBV,AbbVie Inc.,stock,Healthcare,171.90,medium,false
+MRK,Merck & Co.,stock,Healthcare,128.70,medium,false
+PEP,PepsiCo Inc.,stock,Consumer Staples,176.10,medium,false
+KO,Coca-Cola Co.,stock,Consumer Staples,63.80,low,false
+ADBE,Adobe Inc.,stock,Technology,492.60,high,false
+NFLX,Netflix Inc.,stock,Communication Services,614.20,high,false
+CRM,Salesforce Inc.,stock,Technology,283.40,high,false
+COST,Costco Wholesale Corp.,stock,Consumer Staples,712.10,medium,false
+WMT,Walmart Inc.,stock,Consumer Staples,65.20,low,false
+AMD,Advanced Micro Devices,stock,Technology,164.40,high,false
+INTC,Intel Corp.,stock,Technology,34.80,medium,false
+CSCO,Cisco Systems Inc.,stock,Technology,49.70,medium,false
+ORCL,Oracle Corp.,stock,Technology,126.30,medium,false
+TXN,Texas Instruments,stock,Technology,184.50,medium,false
+AVGO,Broadcom Inc.,stock,Technology,1324.00,high,false
+BAC,Bank of America Corp.,stock,Financials,38.40,medium,false
+WFC,Wells Fargo & Co.,stock,Financials,58.20,medium,false
+GS,Goldman Sachs Group,stock,Financials,447.30,medium,false
+MS,Morgan Stanley,stock,Financials,95.60,medium,false
+CAT,Caterpillar Inc.,stock,Industrials,337.80,medium,false
+DE,Deere & Co.,stock,Industrials,399.20,medium,false
+GE,GE Aerospace,stock,Industrials,160.40,medium,false
+HON,Honeywell International,stock,Industrials,204.80,medium,false
+IBM,IBM Corp.,stock,Technology,185.70,medium,false
+QCOM,Qualcomm Inc.,stock,Technology,181.40,medium,false
+AMGN,Amgen Inc.,stock,Healthcare,282.60,medium,false
+TMO,Thermo Fisher Scientific,stock,Healthcare,562.40,medium,false
+ISRG,Intuitive Surgical,stock,Healthcare,386.10,high,false
+LMT,Lockheed Martin,stock,Industrials,463.20,medium,false
+NKE,Nike Inc.,stock,Consumer Discretionary,92.50,medium,false
+SBUX,Starbucks Corp.,stock,Consumer Discretionary,88.30,medium,false
+MCD,McDonald's Corp.,stock,Consumer Discretionary,281.40,medium,false
+LOW,Lowe's Companies,stock,Consumer Discretionary,229.70,medium,false
+PFE,Pfizer Inc.,stock,Healthcare,28.10,low,false
+ABT,Abbott Laboratories,stock,Healthcare,112.80,medium,false
+LIN,Linde plc,stock,Materials,438.60,medium,false
+NOW,ServiceNow Inc.,stock,Technology,742.50,high,false
+SPGI,S&P Global Inc.,stock,Financials,433.20,medium,false
+BKNG,Booking Holdings,stock,Consumer Discretionary,3560.00,high,false
+MDT,Medtronic plc,stock,Healthcare,82.40,medium,false
+COP,ConocoPhillips,stock,Energy,121.50,medium,false
+PLD,Prologis Inc.,stock,Real Estate,124.70,medium,false
+NEE,NextEra Energy,stock,Utilities,67.80,medium,false
+DUK,Duke Energy Corp.,stock,Utilities,99.60,low,false
+SO,Southern Co.,stock,Utilities,75.40,low,false
+VRTX,Vertex Pharmaceuticals,stock,Healthcare,413.80,high,false
+BLK,BlackRock Inc.,stock,Financials,812.60,medium,false
+SCHW,Charles Schwab Corp.,stock,Financials,73.80,medium,false
+AXP,American Express Co.,stock,Financials,231.90,medium,false
+C,Citigroup Inc.,stock,Financials,62.50,medium,false
+USB,U.S. Bancorp,stock,Financials,42.40,medium,false
+RTX,RTX Corp.,stock,Industrials,101.70,medium,false
+BA,Boeing Co.,stock,Industrials,176.20,high,false
+PANW,Palo Alto Networks,stock,Technology,314.80,high,false
+SNOW,Snowflake Inc.,stock,Technology,161.20,high,false
+SHOP,Shopify Inc.,stock,Technology,77.30,high,false
+UBER,Uber Technologies,stock,Industrials,69.20,high,false
+PYPL,PayPal Holdings,stock,Financials,63.70,medium,false
+INTU,Intuit Inc.,stock,Technology,628.20,high,false
+ADP,Automatic Data Processing,stock,Industrials,247.60,medium,false
+MMM,3M Co.,stock,Industrials,98.40,medium,false
+F,Ford Motor Co.,stock,Consumer Discretionary,12.20,medium,false
+GM,General Motors Co.,stock,Consumer Discretionary,43.80,medium,false
+VTI,Vanguard Total Stock Market ETF,etf,Broad Market,257.10,medium,true
+VOO,Vanguard S&P 500 ETF,etf,Large Blend,480.20,medium,true
+SPY,SPDR S&P 500 ETF Trust,etf,Large Blend,523.60,medium,true
+QQQ,Invesco QQQ Trust,etf,Large Growth,448.40,high,true
+DIA,SPDR Dow Jones Industrial Average ETF,etf,Large Value,398.80,medium,true
+IWM,iShares Russell 2000 ETF,etf,Small Blend,204.60,high,true
+VT,Vanguard Total World Stock ETF,etf,Global Equity,111.40,medium,true
+BND,Vanguard Total Bond Market ETF,etf,Intermediate Bond,72.80,low,true
+AGG,iShares Core U.S. Aggregate Bond ETF,etf,Intermediate Bond,97.20,low,true
+SCHD,Schwab U.S. Dividend Equity ETF,etf,Large Value,79.10,medium,true
+VIG,Vanguard Dividend Appreciation ETF,etf,Large Blend,183.20,medium,true
+XLK,Technology Select Sector SPDR Fund,etf,Technology,212.40,high,true
+XLF,Financial Select Sector SPDR Fund,etf,Financials,41.30,medium,true
+XLV,Health Care Select Sector SPDR Fund,etf,Healthcare,145.70,medium,true
+XLE,Energy Select Sector SPDR Fund,etf,Energy,94.20,medium,true
+XLI,Industrial Select Sector SPDR Fund,etf,Industrials,123.60,medium,true
+XLP,Consumer Staples Select Sector SPDR Fund,etf,Consumer Staples,76.10,low,true
+XLU,Utilities Select Sector SPDR Fund,etf,Utilities,68.50,low,true
+XLRE,Real Estate Select Sector SPDR Fund,etf,Real Estate,38.60,medium,true
+VNQ,Vanguard Real Estate ETF,etf,Real Estate,83.20,medium,true
+VEA,Vanguard FTSE Developed Markets ETF,etf,International Equity,49.20,medium,true
+VWO,Vanguard FTSE Emerging Markets ETF,etf,Emerging Markets,42.80,high,true
+TIP,iShares TIPS Bond ETF,etf,Inflation Protected Bond,107.50,low,true
+GLD,SPDR Gold Shares,etf,Commodities,214.90,medium,true
+SLV,iShares Silver Trust,etf,Commodities,25.40,high,true
+BIL,SPDR Bloomberg 1-3 Month T-Bill ETF,etf,Ultrashort Bond,91.60,low,true
+SHV,iShares Short Treasury Bond ETF,etf,Ultrashort Bond,110.20,low,true
+TLT,iShares 20+ Year Treasury Bond ETF,etf,Long Treasury,92.30,medium,true
+IEF,iShares 7-10 Year Treasury Bond ETF,etf,Intermediate Treasury,94.80,low,true
+ITOT,iShares Core S&P Total U.S. Stock Market ETF,etf,Broad Market,124.40,medium,true
+SPLG,SPDR Portfolio S&P 500 ETF,etf,Large Blend,63.10,medium,true
+DGRO,iShares Core Dividend Growth ETF,etf,Large Blend,57.40,medium,true
+QUAL,iShares MSCI USA Quality Factor ETF,etf,Large Blend,168.70,medium,true
+USMV,iShares MSCI USA Min Vol Factor ETF,etf,Large Blend,83.60,low,true
+IEMG,iShares Core MSCI Emerging Markets ETF,etf,Emerging Markets,53.10,high,true

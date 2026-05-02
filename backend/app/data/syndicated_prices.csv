@@ -1,0 +1,120 @@
+symbol,name,asset_class,portfolio_bucket,sector,latest_price,previous_close,as_of_date,source
+AAPL,Apple Inc.,stock,US Growth,Technology,189.50,188.10,2026-05-02,syndicated_csv
+MSFT,Microsoft Corp.,stock,US Growth,Technology,415.20,412.80,2026-05-02,syndicated_csv
+NVDA,NVIDIA Corp.,stock,US Growth,Technology,875.40,868.60,2026-05-02,syndicated_csv
+AMZN,Amazon.com Inc.,stock,US Growth,Consumer Discretionary,198.60,197.20,2026-05-02,syndicated_csv
+META,Meta Platforms Inc.,stock,US Growth,Communication Services,512.30,508.90,2026-05-02,syndicated_csv
+GOOGL,Alphabet Inc. Class A,stock,US Growth,Communication Services,171.80,170.60,2026-05-02,syndicated_csv
+GOOG,Alphabet Inc. Class C,stock,US Growth,Communication Services,173.10,171.90,2026-05-02,syndicated_csv
+TSLA,Tesla Inc.,stock,US Growth,Consumer Discretionary,181.20,179.40,2026-05-02,syndicated_csv
+BRKB,Berkshire Hathaway B,stock,US Core,Financials,412.60,410.10,2026-05-02,syndicated_csv
+JPM,JPMorgan Chase & Co.,stock,US Core,Financials,198.40,196.90,2026-05-02,syndicated_csv
+JNJ,Johnson & Johnson,stock,Defensive Equity,Healthcare,152.30,151.70,2026-05-02,syndicated_csv
+V,Visa Inc.,stock,US Core,Financials,277.40,275.30,2026-05-02,syndicated_csv
+PG,Procter & Gamble,stock,Defensive Equity,Consumer Staples,168.40,167.80,2026-05-02,syndicated_csv
+UNH,UnitedHealth Group,stock,US Core,Healthcare,489.20,485.10,2026-05-02,syndicated_csv
+HD,Home Depot Inc.,stock,US Core,Consumer Discretionary,349.80,347.40,2026-05-02,syndicated_csv
+MA,Mastercard Inc.,stock,US Core,Financials,471.30,468.60,2026-05-02,syndicated_csv
+DIS,Walt Disney Co.,stock,US Core,Communication Services,111.90,110.30,2026-05-02,syndicated_csv
+XOM,Exxon Mobil Corp.,stock,Real Assets,Energy,118.50,117.20,2026-05-02,syndicated_csv
+CVX,Chevron Corp.,stock,Real Assets,Energy,161.10,159.90,2026-05-02,syndicated_csv
+ABBV,AbbVie Inc.,stock,Defensive Equity,Healthcare,171.90,170.80,2026-05-02,syndicated_csv
+MRK,Merck & Co.,stock,Defensive Equity,Healthcare,128.70,127.90,2026-05-02,syndicated_csv
+PEP,PepsiCo Inc.,stock,Defensive Equity,Consumer Staples,176.10,175.20,2026-05-02,syndicated_csv
+KO,Coca-Cola Co.,stock,Defensive Equity,Consumer Staples,63.80,63.10,2026-05-02,syndicated_csv
+ADBE,Adobe Inc.,stock,US Growth,Technology,492.60,488.50,2026-05-02,syndicated_csv
+NFLX,Netflix Inc.,stock,US Growth,Communication Services,614.20,608.90,2026-05-02,syndicated_csv
+CRM,Salesforce Inc.,stock,US Growth,Technology,283.40,281.30,2026-05-02,syndicated_csv
+COST,Costco Wholesale Corp.,stock,US Core,Consumer Staples,712.10,708.90,2026-05-02,syndicated_csv
+WMT,Walmart Inc.,stock,Defensive Equity,Consumer Staples,65.20,64.90,2026-05-02,syndicated_csv
+AMD,Advanced Micro Devices,stock,US Growth,Technology,164.40,162.80,2026-05-02,syndicated_csv
+INTC,Intel Corp.,stock,US Core,Technology,34.80,34.20,2026-05-02,syndicated_csv
+CSCO,Cisco Systems Inc.,stock,US Core,Technology,49.70,49.10,2026-05-02,syndicated_csv
+ORCL,Oracle Corp.,stock,US Core,Technology,126.30,125.20,2026-05-02,syndicated_csv
+TXN,Texas Instruments,stock,US Core,Technology,184.50,183.40,2026-05-02,syndicated_csv
+AVGO,Broadcom Inc.,stock,US Growth,Technology,1324.00,1312.00,2026-05-02,syndicated_csv
+BAC,Bank of America Corp.,stock,US Core,Financials,38.40,38.10,2026-05-02,syndicated_csv
+WFC,Wells Fargo & Co.,stock,US Core,Financials,58.20,57.70,2026-05-02,syndicated_csv
+GS,Goldman Sachs Group,stock,US Core,Financials,447.30,444.80,2026-05-02,syndicated_csv
+MS,Morgan Stanley,stock,US Core,Financials,95.60,95.10,2026-05-02,syndicated_csv
+CAT,Caterpillar Inc.,stock,US Core,Industrials,337.80,335.90,2026-05-02,syndicated_csv
+DE,Deere & Co.,stock,US Core,Industrials,399.20,396.00,2026-05-02,syndicated_csv
+GE,GE Aerospace,stock,US Core,Industrials,160.40,159.10,2026-05-02,syndicated_csv
+HON,Honeywell International,stock,US Core,Industrials,204.80,203.30,2026-05-02,syndicated_csv
+IBM,IBM Corp.,stock,US Core,Technology,185.70,184.60,2026-05-02,syndicated_csv
+QCOM,Qualcomm Inc.,stock,US Core,Technology,181.40,180.10,2026-05-02,syndicated_csv
+AMGN,Amgen Inc.,stock,Defensive Equity,Healthcare,282.60,280.80,2026-05-02,syndicated_csv
+TMO,Thermo Fisher Scientific,stock,US Core,Healthcare,562.40,558.30,2026-05-02,syndicated_csv
+ISRG,Intuitive Surgical,stock,US Growth,Healthcare,386.10,383.50,2026-05-02,syndicated_csv
+LMT,Lockheed Martin,stock,Defensive Equity,Industrials,463.20,460.20,2026-05-02,syndicated_csv
+NKE,Nike Inc.,stock,US Core,Consumer Discretionary,92.50,91.80,2026-05-02,syndicated_csv
+SBUX,Starbucks Corp.,stock,US Core,Consumer Discretionary,88.30,87.40,2026-05-02,syndicated_csv
+MCD,McDonald's Corp.,stock,Defensive Equity,Consumer Discretionary,281.40,279.80,2026-05-02,syndicated_csv
+LOW,Lowe's Companies,stock,US Core,Consumer Discretionary,229.70,228.20,2026-05-02,syndicated_csv
+PFE,Pfizer Inc.,stock,Defensive Equity,Healthcare,28.10,27.80,2026-05-02,syndicated_csv
+ABT,Abbott Laboratories,stock,Defensive Equity,Healthcare,112.80,111.90,2026-05-02,syndicated_csv
+LIN,Linde plc,stock,US Core,Materials,438.60,435.30,2026-05-02,syndicated_csv
+NOW,ServiceNow Inc.,stock,US Growth,Technology,742.50,736.20,2026-05-02,syndicated_csv
+SPGI,S&P Global Inc.,stock,US Core,Financials,433.20,430.10,2026-05-02,syndicated_csv
+BKNG,Booking Holdings,stock,US Growth,Consumer Discretionary,3560.00,3521.00,2026-05-02,syndicated_csv
+MDT,Medtronic plc,stock,Defensive Equity,Healthcare,82.40,81.90,2026-05-02,syndicated_csv
+COP,ConocoPhillips,stock,Real Assets,Energy,121.50,120.10,2026-05-02,syndicated_csv
+PLD,Prologis Inc.,stock,Income Equity,Real Estate,124.70,123.80,2026-05-02,syndicated_csv
+NEE,NextEra Energy,stock,Income Equity,Utilities,67.80,67.10,2026-05-02,syndicated_csv
+DUK,Duke Energy Corp.,stock,Income Equity,Utilities,99.60,98.70,2026-05-02,syndicated_csv
+SO,Southern Co.,stock,Income Equity,Utilities,75.40,74.80,2026-05-02,syndicated_csv
+VRTX,Vertex Pharmaceuticals,stock,US Growth,Healthcare,413.80,410.20,2026-05-02,syndicated_csv
+BLK,BlackRock Inc.,stock,US Core,Financials,812.60,808.40,2026-05-02,syndicated_csv
+SCHW,Charles Schwab Corp.,stock,US Core,Financials,73.80,73.20,2026-05-02,syndicated_csv
+AXP,American Express Co.,stock,US Core,Financials,231.90,230.10,2026-05-02,syndicated_csv
+C,Citigroup Inc.,stock,US Core,Financials,62.50,61.90,2026-05-02,syndicated_csv
+USB,U.S. Bancorp,stock,US Core,Financials,42.40,41.80,2026-05-02,syndicated_csv
+RTX,RTX Corp.,stock,US Core,Industrials,101.70,100.90,2026-05-02,syndicated_csv
+BA,Boeing Co.,stock,US Growth,Industrials,176.20,174.30,2026-05-02,syndicated_csv
+PANW,Palo Alto Networks,stock,US Growth,Technology,314.80,311.70,2026-05-02,syndicated_csv
+SNOW,Snowflake Inc.,stock,US Growth,Technology,161.20,159.40,2026-05-02,syndicated_csv
+SHOP,Shopify Inc.,stock,US Growth,Technology,77.30,76.50,2026-05-02,syndicated_csv
+UBER,Uber Technologies,stock,US Growth,Industrials,69.20,68.10,2026-05-02,syndicated_csv
+PYPL,PayPal Holdings,stock,US Core,Financials,63.70,62.90,2026-05-02,syndicated_csv
+INTU,Intuit Inc.,stock,US Growth,Technology,628.20,623.60,2026-05-02,syndicated_csv
+ADP,Automatic Data Processing,stock,US Core,Industrials,247.60,246.20,2026-05-02,syndicated_csv
+MMM,3M Co.,stock,US Core,Industrials,98.40,97.80,2026-05-02,syndicated_csv
+F,Ford Motor Co.,stock,US Core,Consumer Discretionary,12.20,12.00,2026-05-02,syndicated_csv
+GM,General Motors Co.,stock,US Core,Consumer Discretionary,43.80,43.10,2026-05-02,syndicated_csv
+VTI,Vanguard Total Stock Market ETF,etf,Diversified Equity,Broad Market,257.10,255.60,2026-05-02,syndicated_csv
+VOO,Vanguard S&P 500 ETF,etf,Diversified Equity,Large Blend,480.20,477.90,2026-05-02,syndicated_csv
+SPY,SPDR S&P 500 ETF Trust,etf,Diversified Equity,Large Blend,523.60,520.40,2026-05-02,syndicated_csv
+QQQ,Invesco QQQ Trust,etf,Growth ETF,Large Growth,448.40,445.30,2026-05-02,syndicated_csv
+DIA,SPDR Dow Jones Industrial Average ETF,etf,Diversified Equity,Large Value,398.80,396.10,2026-05-02,syndicated_csv
+IWM,iShares Russell 2000 ETF,etf,Small Cap ETF,Small Blend,204.60,202.70,2026-05-02,syndicated_csv
+VT,Vanguard Total World Stock ETF,etf,Global Diversified,Global Equity,111.40,110.60,2026-05-02,syndicated_csv
+BND,Vanguard Total Bond Market ETF,bond_etf,Core Bonds,Intermediate Bond,72.80,72.60,2026-05-02,syndicated_csv
+AGG,iShares Core U.S. Aggregate Bond ETF,bond_etf,Core Bonds,Intermediate Bond,97.20,96.90,2026-05-02,syndicated_csv
+SCHD,Schwab U.S. Dividend Equity ETF,etf,Income ETF,Large Value,79.10,78.70,2026-05-02,syndicated_csv
+VIG,Vanguard Dividend Appreciation ETF,etf,Income ETF,Large Blend,183.20,182.10,2026-05-02,syndicated_csv
+XLK,Technology Select Sector SPDR Fund,etf,Sector ETF,Technology,212.40,210.80,2026-05-02,syndicated_csv
+XLF,Financial Select Sector SPDR Fund,etf,Sector ETF,Financials,41.30,41.00,2026-05-02,syndicated_csv
+XLV,Health Care Select Sector SPDR Fund,etf,Sector ETF,Healthcare,145.70,144.80,2026-05-02,syndicated_csv
+XLE,Energy Select Sector SPDR Fund,etf,Sector ETF,Energy,94.20,93.40,2026-05-02,syndicated_csv
+XLI,Industrial Select Sector SPDR Fund,etf,Sector ETF,Industrials,123.60,122.80,2026-05-02,syndicated_csv
+XLP,Consumer Staples Select Sector SPDR Fund,etf,Sector ETF,Consumer Staples,76.10,75.60,2026-05-02,syndicated_csv
+XLU,Utilities Select Sector SPDR Fund,etf,Sector ETF,Utilities,68.50,68.20,2026-05-02,syndicated_csv
+XLRE,Real Estate Select Sector SPDR Fund,etf,Sector ETF,Real Estate,38.60,38.30,2026-05-02,syndicated_csv
+VNQ,Vanguard Real Estate ETF,etf,Income ETF,Real Estate,83.20,82.80,2026-05-02,syndicated_csv
+VEA,Vanguard FTSE Developed Markets ETF,international_etf,International Diversified,International Equity,49.20,48.90,2026-05-02,syndicated_csv
+VXUS,Vanguard Total International Stock ETF,international_etf,International Diversified,International Equity,62.70,62.10,2026-05-02,syndicated_csv
+VWO,Vanguard FTSE Emerging Markets ETF,international_etf,International Diversified,Emerging Markets,42.80,42.30,2026-05-02,syndicated_csv
+TIP,iShares TIPS Bond ETF,bond_etf,Inflation Shield,Inflation Protected Bond,107.50,107.10,2026-05-02,syndicated_csv
+GLD,SPDR Gold Shares,etf,Real Assets,Commodities,214.90,213.40,2026-05-02,syndicated_csv
+SLV,iShares Silver Trust,etf,Real Assets,Commodities,25.40,25.10,2026-05-02,syndicated_csv
+BIL,SPDR Bloomberg 1-3 Month T-Bill ETF,bond_etf,Short Treasury,Ultrashort Bond,91.60,91.50,2026-05-02,syndicated_csv
+SHV,iShares Short Treasury Bond ETF,bond_etf,Short Treasury,Ultrashort Bond,110.20,110.00,2026-05-02,syndicated_csv
+TLT,iShares 20+ Year Treasury Bond ETF,bond_etf,Core Bonds,Long Treasury,92.30,91.90,2026-05-02,syndicated_csv
+IEF,iShares 7-10 Year Treasury Bond ETF,bond_etf,Core Bonds,Intermediate Treasury,94.80,94.50,2026-05-02,syndicated_csv
+ITOT,iShares Core S&P Total U.S. Stock Market ETF,etf,Diversified Equity,Broad Market,124.40,123.80,2026-05-02,syndicated_csv
+SPLG,SPDR Portfolio S&P 500 ETF,etf,Diversified Equity,Large Blend,63.10,62.80,2026-05-02,syndicated_csv
+DGRO,iShares Core Dividend Growth ETF,etf,Income ETF,Large Blend,57.40,57.00,2026-05-02,syndicated_csv
+QUAL,iShares MSCI USA Quality Factor ETF,etf,Factor ETF,Large Blend,168.70,167.60,2026-05-02,syndicated_csv
+USMV,iShares MSCI USA Min Vol Factor ETF,etf,Factor ETF,Large Blend,83.60,83.10,2026-05-02,syndicated_csv
+IEMG,iShares Core MSCI Emerging Markets ETF,international_etf,International Diversified,Emerging Markets,53.10,52.70,2026-05-02,syndicated_csv
+NAVN,Navana Networks Inc.,stock,US Growth,Technology,18.00,17.60,2026-05-02,syndicated_csv

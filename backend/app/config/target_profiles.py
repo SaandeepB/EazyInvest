@@ -1,0 +1,127 @@
+TARGET_PROFILE_CATEGORIES = [
+    "Individual Stocks",
+    "Broad Market Funds",
+    "International Funds",
+    "Defensive / Stability Funds",
+    "Dividend / Income Funds",
+    "Thematic / Sector Exposure",
+    "Liquidity Placeholder",
+]
+
+
+TARGET_PROFILES = {
+    "Cautious Starter": {
+        "allocation_targets": {
+            "Individual Stocks": 10.0,
+            "Broad Market Funds": 25.0,
+            "International Funds": 10.0,
+            "Defensive / Stability Funds": 35.0,
+            "Dividend / Income Funds": 10.0,
+            "Thematic / Sector Exposure": 0.0,
+            "Liquidity Placeholder": 10.0,
+        },
+        "max_single_holding_pct": 12.0,
+        "max_sector_pct": 22.0,
+        "rebalance_trigger_pct": 5.0,
+        "warning_rules": [
+            "Avoid letting one stock dominate the starter portfolio.",
+            "Keep a stability sleeve for short-term surprises.",
+            "Add thematic ideas only after core diversification is established.",
+        ],
+    },
+    "Goal-Focused Planner": {
+        "allocation_targets": {
+            "Individual Stocks": 15.0,
+            "Broad Market Funds": 30.0,
+            "International Funds": 15.0,
+            "Defensive / Stability Funds": 20.0,
+            "Dividend / Income Funds": 10.0,
+            "Thematic / Sector Exposure": 0.0,
+            "Liquidity Placeholder": 10.0,
+        },
+        "max_single_holding_pct": 15.0,
+        "max_sector_pct": 25.0,
+        "rebalance_trigger_pct": 6.0,
+        "warning_rules": [
+            "Protect near-term goals with a cash or short-duration sleeve.",
+            "Trim risk if one holding becomes larger than the target plan allows.",
+            "Favor broad funds before adding concentrated bets.",
+        ],
+    },
+    "Balanced Builder": {
+        "allocation_targets": {
+            "Individual Stocks": 20.0,
+            "Broad Market Funds": 30.0,
+            "International Funds": 15.0,
+            "Defensive / Stability Funds": 15.0,
+            "Dividend / Income Funds": 10.0,
+            "Thematic / Sector Exposure": 5.0,
+            "Liquidity Placeholder": 5.0,
+        },
+        "max_single_holding_pct": 18.0,
+        "max_sector_pct": 28.0,
+        "rebalance_trigger_pct": 7.0,
+        "warning_rules": [
+            "Keep the core allocation ahead of tactical additions.",
+            "Use sector tilts sparingly relative to diversified funds.",
+            "Review allocation drift before adding new concentrated positions.",
+        ],
+    },
+    "Long-Term Growth Investor": {
+        "allocation_targets": {
+            "Individual Stocks": 30.0,
+            "Broad Market Funds": 30.0,
+            "International Funds": 15.0,
+            "Defensive / Stability Funds": 5.0,
+            "Dividend / Income Funds": 5.0,
+            "Thematic / Sector Exposure": 10.0,
+            "Liquidity Placeholder": 5.0,
+        },
+        "max_single_holding_pct": 22.0,
+        "max_sector_pct": 32.0,
+        "rebalance_trigger_pct": 8.0,
+        "warning_rules": [
+            "Expect volatility and keep contributions steady through drawdowns.",
+            "Do not let thematic exposure replace the broad-market core.",
+            "Add defensive ballast if withdrawal needs move closer.",
+        ],
+    },
+    "Active Portfolio Tweaker": {
+        "allocation_targets": {
+            "Individual Stocks": 35.0,
+            "Broad Market Funds": 20.0,
+            "International Funds": 10.0,
+            "Defensive / Stability Funds": 10.0,
+            "Dividend / Income Funds": 5.0,
+            "Thematic / Sector Exposure": 15.0,
+            "Liquidity Placeholder": 5.0,
+        },
+        "max_single_holding_pct": 20.0,
+        "max_sector_pct": 30.0,
+        "rebalance_trigger_pct": 8.0,
+        "warning_rules": [
+            "Keep tactical changes inside a defined rebalance band.",
+            "Watch turnover and avoid stacking similar tech or sector bets.",
+            "Maintain at least a small liquidity sleeve for opportunistic changes.",
+        ],
+    },
+    "High-Risk Watchlist User": {
+        "allocation_targets": {
+            "Individual Stocks": 40.0,
+            "Broad Market Funds": 15.0,
+            "International Funds": 10.0,
+            "Defensive / Stability Funds": 5.0,
+            "Dividend / Income Funds": 0.0,
+            "Thematic / Sector Exposure": 25.0,
+            "Liquidity Placeholder": 5.0,
+        },
+        "max_single_holding_pct": 16.0,
+        "max_sector_pct": 28.0,
+        "rebalance_trigger_pct": 10.0,
+        "warning_rules": [
+            "Treat watchlist ideas as satellite exposure, not the whole plan.",
+            "Cap single-name concentration aggressively because volatility is already high.",
+            "If cash needs move forward, step down from concentrated themes quickly.",
+        ],
+    },
+}
