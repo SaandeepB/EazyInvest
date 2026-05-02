@@ -5,6 +5,7 @@ import EvidencePanel from '../components/audit/EvidencePanel'
 import PageShell from '../components/layout/PageShell'
 import MetricCard from '../components/ui/MetricCard'
 import StatusPill from '../components/ui/StatusPill'
+import TableCard from '../components/ui/TableCard'
 import { api } from '../services/api'
 import { clearAudits, useAuditEntries, useAuditReviews } from '../state/auditStore'
 import type { AuditDemoLogItem, AuditDemoResultItem, AuditResult } from '../types'
@@ -86,25 +87,27 @@ export default function AuditLayer() {
   return (
     <PageShell
       eyebrow="Audit Layer"
-      title="Recommendation review surface"
-      description="This layer validates recommendation output, captures evidence packets, and keeps request traces in session memory only."
+      title="Operational review of recommendation outputs."
+      description="This is the only page where audit controls, evidence packets, review statuses, and request traces are surfaced in the UI."
       actions={<button className="btn btn-secondary" onClick={() => clearAudits()}>Clear session traces</button>}
     >
       <section className="metric-grid">
-        <MetricCard label="Reviews" value={String(kpis.total)} tone="navy" />
-        <MetricCard label="Pass" value={String(kpis.pass)} tone="success" />
-        <MetricCard label="Review Needed" value={String(kpis.review)} tone="warning" />
-        <MetricCard label="Fail" value={String(kpis.fail)} tone="error" />
+        <MetricCard label="Reviews" value={String(kpis.total)} detail="Session plus demo cases" tone="navy" />
+        <MetricCard label="Pass" value={String(kpis.pass)} detail="Controls satisfied" tone="success" />
+        <MetricCard label="Review Needed" value={String(kpis.review)} detail="Requires analyst attention" tone="warning" />
+        <MetricCard label="Fail" value={String(kpis.fail)} detail="High-priority exception" tone="error" />
       </section>
 
-      <section className="content-grid">
+      <section className="audit-layout">
         <div className="stack-lg">
-          {selectedReview ? <ControlMatrix controls={selectedReview.auditResult.controls} /> : <div className="card empty-panel">No review packets yet.</div>}
+          {selectedReview ? <ControlMatrix controls={selectedReview.auditResult.controls} /> : <section className="card"><div className="empty-state"><strong>No review packets yet</strong><div className="muted">Run a scenario or use the demo endpoints to populate the review queue.</div></div></section>}
 
-          <section className="card stack-sm">
-            <div className="section-title">Recent reviews</div>
+          <TableCard title="Recent reviews" description="Session reviews appear alongside the seeded demo cases so you can inspect both live and sample packets.">
             {reviewRows.length === 0 ? (
-              <div className="empty-panel">Run a scenario or use demo endpoints to populate review packets.</div>
+              <div className="empty-state">
+                <strong>No audit reviews yet</strong>
+                <div className="muted">Scenario analyses with audit results will land here automatically.</div>
+              </div>
             ) : (
               <div className="review-list">
                 {reviewRows.map(item => (
@@ -125,11 +128,11 @@ export default function AuditLayer() {
                 ))}
               </div>
             )}
-          </section>
+          </TableCard>
 
           {entries.length > 0 && (
             <section className="stack-sm">
-              <div className="section-title">Request traces</div>
+              <div className="section-title">Recent request traces</div>
               {entries.slice(0, 2).map(entry => (
                 <AuditTracePanel key={`${entry.feature}-${entry.receivedAt}`} audit={entry.audit} title={entry.feature} />
               ))}
@@ -140,10 +143,13 @@ export default function AuditLayer() {
         <div className="stack-lg">
           {selectedReview && <EvidencePanel title="Evidence packet" rows={evidenceRows} />}
 
-          <section className="card stack-sm">
+          <section className="card stack-md">
             <div className="section-title">Exceptions</div>
             {exceptions.length === 0 ? (
-              <div className="empty-panel">No exceptions in the selected review.</div>
+              <div className="empty-state">
+                <strong>No exceptions</strong>
+                <div className="muted">The selected review did not produce review-needed or fail controls.</div>
+              </div>
             ) : (
               <div className="stack-sm">
                 {exceptions.map(control => (

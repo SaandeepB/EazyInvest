@@ -16,12 +16,12 @@ export default function PageShell({ eyebrow, title, description, aside, actions,
         <div className="page-hero-copy">
           <div className="eyebrow">{eyebrow}</div>
           <h1 className="page-title">{title}</h1>
-          <p className="muted page-description">{description}</p>
+          <p className="page-description">{description}</p>
         </div>
         {(aside || actions) && (
           <div className="page-hero-aside">
-            {aside}
-            {actions && <div className="button-row">{actions}</div>}
+            {aside && <div className="page-hero-note">{aside}</div>}
+            {actions && <div className="page-hero-actions">{actions}</div>}
           </div>
         )}
       </section>

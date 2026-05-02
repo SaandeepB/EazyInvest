@@ -49,7 +49,7 @@ export default function Onboarding({ onComplete }: { onComplete: () => void }) {
       <form className="card onboarding-card" onSubmit={handleSubmit}>
         <div className="eyebrow">Profiler Agent Intake</div>
         <h1 className="page-title">Set up EazyInvest</h1>
-        <p className="muted">This onboarding stays lightweight but still feeds the profiler, scenario routing, and audit trail.</p>
+        <p className="muted">This onboarding stays lightweight but still feeds the profiler and scenario routing.</p>
 
         <div className="form-grid">
           <label className="field">

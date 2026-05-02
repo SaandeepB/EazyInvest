@@ -1,4 +1,12 @@
+import { Search, Sparkles, WalletCards } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
+import HoldingPreviewCard from '../components/holdings/HoldingPreviewCard'
+import PageShell from '../components/layout/PageShell'
+import EmptyState from '../components/ui/EmptyState'
+import InputCard from '../components/ui/InputCard'
+import MetricCard from '../components/ui/MetricCard'
+import StatusPill from '../components/ui/StatusPill'
+import TableCard from '../components/ui/TableCard'
 import { api } from '../services/api'
 import type { Holding, HoldingCreate, LookupResult } from '../types'
 
@@ -6,7 +14,7 @@ const EMPTY_FORM: HoldingCreate = { symbol: '', quantity: 0, avg_cost: 0 }
 
 function formatCurrency(value: number | null | undefined): string {
   if (value === null || value === undefined) {
-    return '—'
+    return '--'
   }
   return `$${value.toLocaleString(undefined, {
     minimumFractionDigits: 2,
@@ -41,6 +49,16 @@ export default function Holdings() {
   )
 
   const showUnknownPreview = normalizedSymbol.length > 0 && !selectedLookup
+
+  const totals = useMemo(() => {
+    const costBasis = holdings.reduce((sum, holding) => sum + holding.cost_basis, 0)
+    const marketValue = holdings.reduce((sum, holding) => sum + (holding.current_value ?? holding.estimated_value ?? 0), 0)
+    return {
+      count: holdings.length,
+      costBasis,
+      marketValue,
+    }
+  }, [holdings])
 
   const load = async () => {
     setLoading(true)
@@ -109,159 +127,191 @@ export default function Holdings() {
   }
 
   return (
-    <div className="page-grid">
-      <section className="card stack-sm">
-        <div className="eyebrow">My Holdings</div>
-        <h1 className="page-title">Only user-added positions appear here</h1>
-        <p className="muted">
-          Symbol lookup and autocomplete come from the syndicated CSV dataset. Known symbols use the CSV market proxy
-          price. Unknown symbols are still allowed, but they keep a null market proxy price and show estimated value
-          from your purchase price instead.
-        </p>
+    <PageShell
+      eyebrow="My Holdings"
+      title="Manage only the positions you have actually added."
+      description="Lookup is powered by the syndicated CSV dataset. Known symbols receive proxy pricing; unknown symbols stay supported with estimated values based on your purchase price."
+      aside={<StatusPill label={`${totals.count} holdings`} tone="navy" />}
+    >
+      <section className="metric-grid">
+        <MetricCard label="User-added holdings" value={String(totals.count)} detail="Only your positions appear here" tone="navy" icon={WalletCards} />
+        <MetricCard label="Total cost basis" value={formatCurrency(totals.costBasis)} detail="Quantity multiplied by purchase price" tone="blue" icon={Sparkles} />
+        <MetricCard label="Value tracked" value={formatCurrency(totals.marketValue)} detail="Market or estimated value from valuation service" tone="teal" icon={Search} />
       </section>
 
-      <section className="main-grid">
-        <div className="card stack-sm">
-          <div className="section-title">{editingId ? 'Edit holding' : 'Add a holding'}</div>
-          <form className="stack-sm" onSubmit={handleSubmit}>
-            <label className="field">
-              <span>Symbol</span>
-              <input
-                value={form.symbol}
-                onChange={e => setForm(current => ({ ...current, symbol: e.target.value.toUpperCase() }))}
-                placeholder="AAPL"
-                required
-                disabled={editingId !== null}
-              />
-            </label>
+      <section className="holdings-layout">
+        <div className="stack-lg">
+          <InputCard
+            title={editingId ? 'Edit holding' : 'Add a holding'}
+            description="Enter a symbol, quantity, and purchase price. Symbol lookup is optional, but it helps prefill the proxy market context."
+          >
+            <form className="stack-md" onSubmit={handleSubmit}>
+              <div className="form-grid">
+                <label className="field">
+                  <span>Symbol</span>
+                  <input
+                    value={form.symbol}
+                    onChange={e => setForm(current => ({ ...current, symbol: e.target.value.toUpperCase() }))}
+                    placeholder="AAPL"
+                    required
+                    disabled={editingId !== null}
+                  />
+                </label>
 
-            {editingId === null && suggestions.length > 0 && (
-              <div className="suggestions">
-                {suggestions.map(item => (
+                <label className="field">
+                  <span>Quantity</span>
+                  <input
+                    type="number"
+                    min="0.0001"
+                    step="any"
+                    value={form.quantity || ''}
+                    onChange={e => setForm(current => ({ ...current, quantity: Number(e.target.value) }))}
+                    required
+                  />
+                </label>
+
+                <label className="field">
+                  <span>Purchase Price</span>
+                  <input
+                    type="number"
+                    min="0.01"
+                    step="any"
+                    value={form.avg_cost || ''}
+                    onChange={e => setForm(current => ({ ...current, avg_cost: Number(e.target.value) }))}
+                    required
+                  />
+                </label>
+              </div>
+
+              {editingId === null && suggestions.length > 0 && (
+                <div className="suggestions">
+                  {suggestions.slice(0, 6).map(item => (
+                    <button
+                      type="button"
+                      key={item.symbol}
+                      className="suggestion-item"
+                      onClick={() => setForm(current => ({ ...current, symbol: item.symbol }))}
+                    >
+                      <div>
+                        <strong>{item.symbol}</strong>
+                        <div className="muted">{item.name}</div>
+                      </div>
+                      <StatusPill label={item.asset_type} tone="blue" />
+                      <span className="suggestion-price">{formatCurrency(item.proxy_price)}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {error && <div className="error-banner">{error}</div>}
+
+              <div className="button-row">
+                <button className="btn btn-primary" disabled={saving}>
+                  {saving ? 'Saving...' : editingId ? 'Save changes' : 'Add holding'}
+                </button>
+                {editingId !== null && (
                   <button
                     type="button"
-                    key={item.symbol}
-                    className="suggestion-item"
-                    onClick={() => setForm(current => ({ ...current, symbol: item.symbol }))}
+                    className="btn btn-secondary"
+                    onClick={() => {
+                      setEditingId(null)
+                      setForm(EMPTY_FORM)
+                      setSuggestions([])
+                      setError('')
+                    }}
                   >
-                    <strong>{item.symbol}</strong>
-                    <span>{item.name}</span>
-                    <span>{formatCurrency(item.proxy_price)}</span>
+                    Cancel
                   </button>
-                ))}
+                )}
+              </div>
+            </form>
+          </InputCard>
+
+          <TableCard
+            title="Current holdings"
+            description="This table shows only the positions you added, never the full market proxy CSV universe."
+          >
+            {loading ? (
+              <div>Loading holdings...</div>
+            ) : holdings.length === 0 ? (
+              <EmptyState title="No holdings yet" description="Add your first position to start tracking cost basis, market proxy value, and estimated value." />
+            ) : (
+              <div className="table-wrap">
+                <table className="holdings-table">
+                  <thead>
+                    <tr>
+                      <th>Symbol</th>
+                      <th>Type</th>
+                      <th>Quantity</th>
+                      <th>Purchase Price</th>
+                      <th>Market Proxy Price</th>
+                      <th>Cost Basis</th>
+                      <th>Market Value / Estimated Value</th>
+                      <th>Source</th>
+                      <th />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {holdings.map(holding => (
+                      <tr key={holding.id}>
+                        <td>
+                          <div className="table-symbol">
+                            <strong>{holding.symbol}</strong>
+                            <span className="muted">{holding.name}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="table-symbol">
+                            <span>{holding.asset_type}</span>
+                            <span className="muted">{holding.sector_or_category}</span>
+                          </div>
+                        </td>
+                        <td>{holding.quantity.toLocaleString()}</td>
+                        <td>{formatCurrency(holding.avg_cost)}</td>
+                        <td>{formatCurrency(holding.current_price)}</td>
+                        <td>{formatCurrency(holding.cost_basis)}</td>
+                        <td>{formatCurrency(holding.current_value ?? holding.estimated_value)}</td>
+                        <td><StatusPill label={formatSource(holding.price_source)} tone={holding.current_price === null ? 'warning' : 'success'} /></td>
+                        <td>
+                          <div className="table-actions">
+                            <button className="btn btn-secondary btn-compact" onClick={() => beginEdit(holding)}>Edit</button>
+                            <button className="btn btn-danger btn-compact" onClick={() => removeHolding(holding.id)}>Delete</button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
-
-            {selectedLookup && (
-              <div className="info-box stack-sm">
-                <strong>{selectedLookup.name}</strong>
-                <span>{selectedLookup.asset_type} | {selectedLookup.sector_or_category}</span>
-                <span>Proxy market price: {formatCurrency(selectedLookup.proxy_price)}</span>
-              </div>
-            )}
-
-            {showUnknownPreview && (
-              <div className="info-box stack-sm">
-                <strong>{normalizedSymbol}</strong>
-                <span>Unknown symbol</span>
-                <span>Market proxy price unavailable. Estimated value will use your purchase price.</span>
-              </div>
-            )}
-
-            <label className="field">
-              <span>Quantity</span>
-              <input
-                type="number"
-                min="0.0001"
-                step="any"
-                value={form.quantity || ''}
-                onChange={e => setForm(current => ({ ...current, quantity: Number(e.target.value) }))}
-                required
-              />
-            </label>
-            <label className="field">
-              <span>Purchase price</span>
-              <input
-                type="number"
-                min="0.01"
-                step="any"
-                value={form.avg_cost || ''}
-                onChange={e => setForm(current => ({ ...current, avg_cost: Number(e.target.value) }))}
-                required
-              />
-            </label>
-            {error && <div className="error-banner">{error}</div>}
-            <div className="button-row">
-              <button className="btn btn-primary" disabled={saving}>
-                {saving ? 'Saving...' : editingId ? 'Save changes' : 'Add holding'}
-              </button>
-              {editingId !== null && (
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => {
-                    setEditingId(null)
-                    setForm(EMPTY_FORM)
-                    setSuggestions([])
-                    setError('')
-                  }}
-                >
-                  Cancel
-                </button>
-              )}
-            </div>
-          </form>
+          </TableCard>
         </div>
 
-        <div className="card stack-sm">
-          <div className="section-title">Current holdings</div>
-          {loading ? (
-            <div>Loading holdings...</div>
-          ) : holdings.length === 0 ? (
-            <div className="empty-panel">No holdings yet. Add your first symbol to start deterministic tracking.</div>
-          ) : (
-            <div className="holdings-table-wrap">
-              <table className="holdings-table">
-                <thead>
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Name</th>
-                    <th>Asset Type</th>
-                    <th>Sector / Category</th>
-                    <th>Purchase Price</th>
-                    <th>Market Proxy Price</th>
-                    <th>Cost Basis</th>
-                    <th>Market Value / Estimated Value</th>
-                    <th>Source</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {holdings.map(holding => (
-                    <tr key={holding.id}>
-                      <td><strong>{holding.symbol}</strong></td>
-                      <td>{holding.name}</td>
-                      <td>{holding.asset_type}</td>
-                      <td>{holding.sector_or_category}</td>
-                      <td>{formatCurrency(holding.avg_cost)}</td>
-                      <td>{formatCurrency(holding.current_price)}</td>
-                      <td>{formatCurrency(holding.cost_basis)}</td>
-                      <td>{formatCurrency(holding.current_value ?? holding.estimated_value)}</td>
-                      <td>{formatSource(holding.price_source)}</td>
-                      <td>
-                        <div className="button-row">
-                          <button className="btn btn-secondary" onClick={() => beginEdit(holding)}>Edit</button>
-                          <button className="btn btn-danger" onClick={() => removeHolding(holding.id)}>Delete</button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <div className="stack-lg">
+          <HoldingPreviewCard symbol={normalizedSymbol} selectedLookup={selectedLookup} showUnknownPreview={showUnknownPreview} />
+          <div className="card stack-sm">
+            <div className="section-title">What gets filled in automatically</div>
+            <div className="list-panel">
+              <div className="list-row">
+                <span>Name and asset type</span>
+                <span className="list-value">From CSV lookup</span>
+              </div>
+              <div className="list-row">
+                <span>Sector or category</span>
+                <span className="list-value">From CSV lookup</span>
+              </div>
+              <div className="list-row">
+                <span>Proxy market price</span>
+                <span className="list-value">Valuation service</span>
+              </div>
+              <div className="list-row">
+                <span>Unknown symbol handling</span>
+                <span className="list-value">Estimated value only</span>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
-    </div>
+    </PageShell>
   )
 }
