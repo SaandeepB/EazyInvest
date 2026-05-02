@@ -2,9 +2,9 @@ import { AlertTriangle, BadgeDollarSign, BarChart3, Layers3, ShieldCheck, Sparkl
 import { useEffect, useMemo, useState } from 'react'
 import AllocationChart from '../components/charts/AllocationChart'
 import PageShell from '../components/layout/PageShell'
-import InfoCard from '../components/ui/InfoCard'
 import DataSourceBadge from '../components/ui/DataSourceBadge'
 import HealthScoreCard from '../components/ui/HealthScoreCard'
+import InfoCard from '../components/ui/InfoCard'
 import MarketContextCard from '../components/ui/MarketContextCard'
 import MetricCard from '../components/ui/MetricCard'
 import RiskMeter from '../components/ui/RiskMeter'
@@ -12,6 +12,7 @@ import StatusPill from '../components/ui/StatusPill'
 import TableCard from '../components/ui/TableCard'
 import { api } from '../services/api'
 import type { PortfolioSummaryResponse } from '../types'
+import { EAZYINVEST_PROFILE_UPDATED_EVENT } from '../utils/profileState'
 
 function formatCurrency(value: number): string {
   return `$${value.toLocaleString(undefined, {
@@ -25,7 +26,14 @@ export default function Dashboard() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    api.getPortfolioSummary().then(setData).catch(err => setError(err.message))
+    const loadSummary = () => {
+      setError('')
+      api.getPortfolioSummary().then(setData).catch(err => setError(err.message))
+    }
+
+    loadSummary()
+    window.addEventListener(EAZYINVEST_PROFILE_UPDATED_EVENT, loadSummary)
+    return () => window.removeEventListener(EAZYINVEST_PROFILE_UPDATED_EVENT, loadSummary)
   }, [])
 
   const coverageLabel = useMemo(() => {
@@ -60,8 +68,8 @@ export default function Dashboard() {
         <MetricCard label="Risk Level" value={portfolio.risk_level} detail={coverageLabel} tone="teal" icon={BarChart3} />
       </section>
 
-      <section className="dashboard-layout">
-        <div className="stack-lg">
+      <section className="dashboard-hero-grid">
+        <div className="dashboard-hero-main">
           <TableCard
             title="Allocation overview"
             description="Horizontal allocation bars keep the distribution easy to compare at a glance."
@@ -69,7 +77,16 @@ export default function Dashboard() {
           >
             <AllocationChart items={portfolio.allocation_bars} />
           </TableCard>
+        </div>
 
+        <div className="dashboard-hero-side">
+          <HealthScoreCard health={portfolio.health} />
+          <RiskMeter level={portfolio.risk_level} stockPct={portfolio.stock_allocation_pct} />
+        </div>
+      </section>
+
+      <section className="dashboard-detail-grid">
+        <div className="dashboard-detail-main">
           <TableCard
             title="Top holdings"
             description="Your largest positions by current market proxy value."
@@ -109,8 +126,10 @@ export default function Dashboard() {
               </div>
             )}
           </TableCard>
+        </div>
 
-          <section className="card stack-md">
+        <div className="dashboard-detail-side">
+          <section className="card stack-md dashboard-source-card">
             <div className="section-header">
               <div className="section-header-copy">
                 <div className="eyebrow">Source Note</div>
@@ -122,35 +141,29 @@ export default function Dashboard() {
               </div>
             </div>
           </section>
-        </div>
-
-        <div className="stack-lg">
-          <HealthScoreCard health={portfolio.health} />
-          <RiskMeter level={portfolio.risk_level} stockPct={portfolio.stock_allocation_pct} />
-
-          <section className="tri-card-grid">
-            <InfoCard
-              title="Diversification"
-              description={portfolio.health.diversification >= 70 ? 'Mix across buckets is in a healthy range.' : 'Current mix is narrow enough to deserve a second look.'}
-              icon={Sparkles}
-              tone={portfolio.health.diversification >= 70 ? 'success' : 'warning'}
-            />
-            <InfoCard
-              title="Concentration"
-              description={portfolio.top_holding_symbol ? `${portfolio.top_holding_symbol} is ${portfolio.top_holding_pct.toFixed(1)}% of total value.` : 'Add holdings to evaluate position concentration.'}
-              icon={AlertTriangle}
-              tone={concentrationTone}
-            />
-            <InfoCard
-              title="Coverage"
-              description={portfolio.holdings_count > 0 ? `${portfolio.holdings_count} user-added holdings are included in the centralized valuation summary.` : 'No user-added holdings are in the portfolio summary yet.'}
-              icon={Layers3}
-              tone="blue"
-            />
-          </section>
-
           <MarketContextCard context={market_context} />
         </div>
+      </section>
+
+      <section className="dashboard-insights-grid">
+        <InfoCard
+          title="Diversification"
+          description={portfolio.health.diversification >= 70 ? 'Mix across buckets is in a healthy range.' : 'Current mix is narrow enough to deserve a second look.'}
+          icon={Sparkles}
+          tone={portfolio.health.diversification >= 70 ? 'success' : 'warning'}
+        />
+        <InfoCard
+          title="Concentration"
+          description={portfolio.top_holding_symbol ? `${portfolio.top_holding_symbol} is ${portfolio.top_holding_pct.toFixed(1)}% of total value.` : 'Add holdings to evaluate position concentration.'}
+          icon={AlertTriangle}
+          tone={concentrationTone}
+        />
+        <InfoCard
+          title="Coverage"
+          description={portfolio.holdings_count > 0 ? `${portfolio.holdings_count} user-added holdings are included in the centralized valuation summary.` : 'No user-added holdings are in the portfolio summary yet.'}
+          icon={Layers3}
+          tone="blue"
+        />
       </section>
     </PageShell>
   )

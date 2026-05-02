@@ -1,5 +1,6 @@
 import { BarChart3, ClipboardCheck, LayoutGrid, Wallet } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import ProfileMenu from './profile/ProfileMenu'
 
 const links = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
@@ -8,7 +9,7 @@ const links = [
   { to: '/audit', label: 'Audit Layer', icon: ClipboardCheck },
 ]
 
-export default function Navbar() {
+export default function Navbar({ onRestartOnboarding }: { onRestartOnboarding: () => void }) {
   return (
     <header className="navbar-shell">
       <nav className="navbar">
@@ -22,13 +23,16 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="nav-links">
-          {links.map(({ to, label, icon: Icon }) => (
-            <NavLink key={to} to={to} className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}>
-              <Icon size={16} />
-              <span>{label}</span>
-            </NavLink>
-          ))}
+        <div className="navbar-actions">
+          <div className="nav-links">
+            {links.map(({ to, label, icon: Icon }) => (
+              <NavLink key={to} to={to} className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}>
+                <Icon size={16} />
+                <span>{label}</span>
+              </NavLink>
+            ))}
+          </div>
+          <ProfileMenu onRestartOnboarding={onRestartOnboarding} />
         </div>
       </nav>
     </header>

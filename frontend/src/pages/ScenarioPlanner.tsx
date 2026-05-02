@@ -16,6 +16,25 @@ function formatAllocation(allocation: Record<string, number>) {
   return Object.entries(allocation).filter(([, value]) => value > 0)
 }
 
+function formatProfileValue(value: string): string {
+  if (!value) return ''
+
+  if (value.includes('-')) {
+    return value
+      .split('-')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('-')
+  }
+
+  return value
+    .split('_')
+    .join(' ')
+    .split(' ')
+    .filter(Boolean)
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
 export default function ScenarioPlanner() {
   const [scenarios, setScenarios] = useState<ScenarioCatalogItem[]>([])
   const [result, setResult] = useState<ScenarioPayload | null>(null)
@@ -123,40 +142,63 @@ export default function ScenarioPlanner() {
             </div>
           </section>
 
-          <section className="scenario-results-layout">
-            <div className="stack-lg">
-              {result.profiler_output && (
-                <section className="card stack-md">
-                  <div className="section-header">
-                    <div className="section-header-copy">
-                      <div className="eyebrow">Profiler Summary</div>
-                      <div className="section-title">{result.profiler_output.investor_segment}</div>
-                      <div className="section-description">{result.profiler_output.reasoning}</div>
-                    </div>
-                    <StatusPill label={result.profiler_output.risk_profile} tone="blue" />
-                  </div>
-
-                  <div className="summary-grid">
-                    <div className="summary-item">
-                      <span className="muted">Liquidity need</span>
-                      <strong>{result.profiler_output.liquidity_need}</strong>
-                    </div>
-                    <div className="summary-item">
-                      <span className="muted">Time horizon</span>
-                      <strong>{result.profiler_output.time_horizon_bucket}</strong>
-                    </div>
-                    <div className="summary-item">
-                      <span className="muted">Recommended route</span>
-                      <strong>{result.profiler_output.recommended_scenario_type}</strong>
-                    </div>
-                    <div className="summary-item">
-                      <span className="muted">Target profile</span>
-                      <strong>{result.profiler_output.target_profile_name}</strong>
+          <section className="scenario-detail-grid">
+            {result.profiler_output && (
+              <section className="card profiler-card stack-md scenario-detail-profiler">
+                <div className="profiler-card-head">
+                  <div className="section-header-copy">
+                    <div className="eyebrow">Profiler Summary</div>
+                    <div className="profiler-card-title-row">
+                      <div className="section-title">{formatProfileValue(result.profiler_output.investor_segment)}</div>
+                      <StatusPill label={formatProfileValue(result.profiler_output.risk_profile)} tone="blue" />
                     </div>
                   </div>
-                </section>
-              )}
+                </div>
 
+                <p className="profiler-card-reasoning">{result.profiler_output.reasoning}</p>
+
+                <div className="profiler-attribute-grid">
+                  <div className="summary-item profiler-attribute-tile">
+                    <span className="muted">Liquidity Need</span>
+                    <strong>{formatProfileValue(result.profiler_output.liquidity_need)}</strong>
+                  </div>
+                  <div className="summary-item profiler-attribute-tile">
+                    <span className="muted">Time Horizon</span>
+                    <strong>{formatProfileValue(result.profiler_output.time_horizon_bucket)}</strong>
+                  </div>
+                  <div className="summary-item profiler-attribute-tile">
+                    <span className="muted">Recommended Route</span>
+                    <strong>{formatProfileValue(result.profiler_output.recommended_scenario_type)}</strong>
+                  </div>
+                  <div className="summary-item profiler-attribute-tile">
+                    <span className="muted">Target Profile</span>
+                    <strong>{formatProfileValue(result.profiler_output.target_profile_name)}</strong>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            <div className={`scenario-allocation-grid scenario-detail-allocation ${result.profiler_output ? '' : 'scenario-detail-allocation-full'}`}>
+              <section className="card stack-md">
+                <div className="section-title">Current allocation</div>
+                {formatAllocation(result.current_allocation).length === 0 ? (
+                  <EmptyState title="No current allocation" description="Add holdings first to see the starting point for a scenario." />
+                ) : (
+                  formatAllocation(result.current_allocation).map(([label, value]) => (
+                    <AllocationBar key={label} label={label} value={value} weightPct={value} valueLabel={`${value.toFixed(1)}%`} />
+                  ))
+                )}
+              </section>
+
+              <section className="card stack-md">
+                <div className="section-title">Recommended allocation</div>
+                {formatAllocation(result.proposed_allocation).map(([label, value]) => (
+                  <AllocationBar key={label} label={label} value={value} weightPct={value} valueLabel={`${value.toFixed(1)}%`} />
+                ))}
+              </section>
+            </div>
+
+            <div className="scenario-detail-rebalance">
               <TableCard
                 title="Rebalancing output"
                 description="Ordered actions based on current allocation versus the selected target profile."
@@ -191,54 +233,32 @@ export default function ScenarioPlanner() {
               </TableCard>
             </div>
 
-            <div className="stack-lg">
-              <div className="scenario-allocation-grid">
-                <section className="card stack-md">
-                  <div className="section-title">Current allocation</div>
-                  {formatAllocation(result.current_allocation).length === 0 ? (
-                    <EmptyState title="No current allocation" description="Add holdings first to see the starting point for a scenario." />
-                  ) : (
-                    formatAllocation(result.current_allocation).map(([label, value]) => (
-                      <AllocationBar key={label} label={label} value={value} weightPct={value} valueLabel={`${value.toFixed(1)}%`} />
-                    ))
-                  )}
-                </section>
+            <section className="card stack-md scenario-detail-market">
+              <div className="section-title">Market context</div>
+              <div className="muted">{result.market_context.narrative}</div>
+            </section>
 
-                <section className="card stack-md">
-                  <div className="section-title">Recommended allocation</div>
-                  {formatAllocation(result.proposed_allocation).map(([label, value]) => (
-                    <AllocationBar key={label} label={label} value={value} weightPct={value} valueLabel={`${value.toFixed(1)}%`} />
-                  ))}
-                </section>
+            <section className="card stack-md scenario-detail-transparency">
+              <div className="section-header">
+                <div className="section-header-copy">
+                  <div className="eyebrow">Transparency</div>
+                  <div className="section-title">Why this recommendation</div>
+                  <div className="section-description">Structured explanations without changing the underlying deterministic math.</div>
+                </div>
+                <div className="icon-chip icon-chip-teal">
+                  <BadgeDollarSign size={18} />
+                </div>
               </div>
 
-              <section className="card stack-md">
-                <div className="section-header">
-                  <div className="section-header-copy">
-                    <div className="eyebrow">Transparency</div>
-                    <div className="section-title">Why this recommendation</div>
-                    <div className="section-description">Structured explanations without changing the underlying deterministic math.</div>
-                  </div>
-                  <div className="icon-chip icon-chip-teal">
-                    <BadgeDollarSign size={18} />
-                  </div>
-                </div>
-
-                <div className="info-card-grid">
-                  <InfoCard title="Why this recommendation" description={result.transparency.why_suggested} tone="teal" />
-                  <InfoCard title="Estimated cost note" description={result.estimated_cost_note} tone="warning" />
-                  <InfoCard title="Tax caution" description={result.estimated_tax_note || result.transparency.selling_impact} tone="warning" />
-                  <InfoCard title="Goal alignment" description={result.transparency.goal_alignment} tone="success" />
-                  <InfoCard title="Upside" description={result.transparency.upside} tone="blue" />
-                  <InfoCard title="Downside tradeoff" description={result.transparency.downside} tone="navy" />
-                </div>
-              </section>
-
-              <section className="card stack-md">
-                <div className="section-title">Market context</div>
-                <div className="muted">{result.market_context.narrative}</div>
-              </section>
-            </div>
+              <div className="info-card-grid">
+                <InfoCard title="Why this recommendation" description={result.transparency.why_suggested} tone="teal" />
+                <InfoCard title="Estimated cost note" description={result.estimated_cost_note} tone="warning" />
+                <InfoCard title="Tax caution" description={result.estimated_tax_note || result.transparency.selling_impact} tone="warning" />
+                <InfoCard title="Goal alignment" description={result.transparency.goal_alignment} tone="success" />
+                <InfoCard title="Upside" description={result.transparency.upside} tone="blue" />
+                <InfoCard title="Downside tradeoff" description={result.transparency.downside} tone="navy" />
+              </div>
+            </section>
           </section>
         </section>
       ) : (

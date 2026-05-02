@@ -45,35 +45,42 @@ EazyInvest/
       types/
 ```
 
-## Local Run
+## How To Run
+
+Open two terminals.
 
 ### Backend
 
-From `backend/`:
-
 ```powershell
+cd backend
 py -m pip install -r requirements.txt
-py -m uvicorn app.main:app --reload
+py -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Backend defaults:
+If you use the local virtual environment instead:
 
-- URL: `http://127.0.0.1:8000`
-- Docs: `http://127.0.0.1:8000/docs`
-- DB: local SQLite file `backend/eazyinvest.db` unless `DATABASE_URL` is set
+```powershell
+cd backend
+.\venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
 
 ### Frontend
 
-From `frontend/`:
-
 ```powershell
+cd frontend
 npm install
-npm run dev
+npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Frontend defaults:
+### Open
 
-- URL: `http://127.0.0.1:5173`
+- Frontend app: `http://127.0.0.1:5173`
+- Backend docs: `http://127.0.0.1:8000/docs`
+- Backend health: `http://127.0.0.1:8000/health`
+
+Note:
+- `http://127.0.0.1:8000/` returns backend JSON. That is normal.
+- The actual UI runs on `http://127.0.0.1:5173`.
 
 ## Test / Build
 
@@ -403,4 +410,3 @@ Do not calculate it independently in the frontend.
 6. Run suggested and custom scenarios
 7. Open `Audit Layer`
 8. Run backend tests and frontend build before finishing
-

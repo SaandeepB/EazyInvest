@@ -65,6 +65,22 @@ export interface UserResponse {
   audit: AuditPayload
 }
 
+export interface UserUpdatePayload {
+  name?: string
+  risk_profile?: string
+  goal?: string
+  time_horizon?: string
+  planned_withdrawal_pct?: number
+  starting_amount?: number
+  monthly_contribution?: number
+  contribution_stability?: string
+  behavioral_risk?: string
+  has_emergency_fund?: string
+  account_type?: string
+  has_external_holdings?: string
+  ux_mode?: string
+}
+
 export interface OnboardingAnswers {
   goal: string
   time_horizon: string

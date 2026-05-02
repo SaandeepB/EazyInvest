@@ -98,10 +98,19 @@ export default function AuditLayer() {
         <MetricCard label="Fail" value={String(kpis.fail)} detail="High-priority exception" tone="error" />
       </section>
 
-      <section className="audit-layout">
-        <div className="stack-lg">
-          {selectedReview ? <ControlMatrix controls={selectedReview.auditResult.controls} /> : <section className="card"><div className="empty-state"><strong>No review packets yet</strong><div className="muted">Run a scenario or use the demo endpoints to populate the review queue.</div></div></section>}
+      {selectedReview ? (
+        <ControlMatrix controls={selectedReview.auditResult.controls} />
+      ) : (
+        <section className="card">
+          <div className="empty-state">
+            <strong>No review packets yet</strong>
+            <div className="muted">Run a scenario or use the demo endpoints to populate the review queue.</div>
+          </div>
+        </section>
+      )}
 
+      <section className="audit-board">
+        <div className="audit-board-main">
           <TableCard title="Recent reviews" description="Session reviews appear alongside the seeded demo cases so you can inspect both live and sample packets.">
             {reviewRows.length === 0 ? (
               <div className="empty-state">
@@ -140,7 +149,7 @@ export default function AuditLayer() {
           )}
         </div>
 
-        <div className="stack-lg">
+        <div className="audit-board-side">
           {selectedReview && <EvidencePanel title="Evidence packet" rows={evidenceRows} />}
 
           <section className="card stack-md">

@@ -1,4 +1,4 @@
-import { Search, Sparkles, WalletCards } from 'lucide-react'
+import { Pencil, Search, Sparkles, Trash2, WalletCards } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import HoldingPreviewCard from '../components/holdings/HoldingPreviewCard'
 import PageShell from '../components/layout/PageShell'
@@ -139,8 +139,8 @@ export default function Holdings() {
         <MetricCard label="Value tracked" value={formatCurrency(totals.marketValue)} detail="Market or estimated value from valuation service" tone="teal" icon={Search} />
       </section>
 
-      <section className="holdings-layout">
-        <div className="stack-lg">
+      <section className="holdings-setup-grid">
+        <div className="holdings-form-panel">
           <InputCard
             title={editingId ? 'Edit holding' : 'Add a holding'}
             description="Enter a symbol, quantity, and purchase price. Symbol lookup is optional, but it helps prefill the proxy market context."
@@ -226,7 +226,39 @@ export default function Holdings() {
               </div>
             </form>
           </InputCard>
+        </div>
 
+        <div className="card stack-sm holdings-autofill-card">
+          <div className="section-title">What gets filled in automatically</div>
+          <div className="list-panel">
+            <div className="list-row">
+              <span>Name and asset type</span>
+              <span className="list-value">From CSV lookup</span>
+            </div>
+            <div className="list-row">
+              <span>Sector or category</span>
+              <span className="list-value">From CSV lookup</span>
+            </div>
+            <div className="list-row">
+              <span>Proxy market price</span>
+              <span className="list-value">Valuation service</span>
+            </div>
+            <div className="list-row">
+              <span>Unknown symbol handling</span>
+              <span className="list-value">Estimated value only</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="holdings-preview-row">
+        <div className="holdings-preview-panel">
+          <HoldingPreviewCard symbol={normalizedSymbol} selectedLookup={selectedLookup} showUnknownPreview={showUnknownPreview} />
+        </div>
+      </section>
+
+      <section>
+        <div className="holdings-table-panel">
           <TableCard
             title="Current holdings"
             description="This table shows only the positions you added, never the full market proxy CSV universe."
@@ -273,9 +305,13 @@ export default function Holdings() {
                         <td>{formatCurrency(holding.current_value ?? holding.estimated_value)}</td>
                         <td><StatusPill label={formatSource(holding.price_source)} tone={holding.current_price === null ? 'warning' : 'success'} /></td>
                         <td>
-                          <div className="table-actions">
-                            <button className="btn btn-secondary btn-compact" onClick={() => beginEdit(holding)}>Edit</button>
-                            <button className="btn btn-danger btn-compact" onClick={() => removeHolding(holding.id)}>Delete</button>
+                          <div className="table-actions table-actions-icon">
+                            <button className="icon-action-btn icon-action-edit" onClick={() => beginEdit(holding)} aria-label={`Edit ${holding.symbol}`}>
+                              <Pencil size={15} />
+                            </button>
+                            <button className="icon-action-btn icon-action-delete" onClick={() => removeHolding(holding.id)} aria-label={`Delete ${holding.symbol}`}>
+                              <Trash2 size={15} />
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -285,31 +321,6 @@ export default function Holdings() {
               </div>
             )}
           </TableCard>
-        </div>
-
-        <div className="stack-lg">
-          <HoldingPreviewCard symbol={normalizedSymbol} selectedLookup={selectedLookup} showUnknownPreview={showUnknownPreview} />
-          <div className="card stack-sm">
-            <div className="section-title">What gets filled in automatically</div>
-            <div className="list-panel">
-              <div className="list-row">
-                <span>Name and asset type</span>
-                <span className="list-value">From CSV lookup</span>
-              </div>
-              <div className="list-row">
-                <span>Sector or category</span>
-                <span className="list-value">From CSV lookup</span>
-              </div>
-              <div className="list-row">
-                <span>Proxy market price</span>
-                <span className="list-value">Valuation service</span>
-              </div>
-              <div className="list-row">
-                <span>Unknown symbol handling</span>
-                <span className="list-value">Estimated value only</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </PageShell>

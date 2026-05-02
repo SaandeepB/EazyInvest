@@ -13,6 +13,7 @@ import type {
   ScenarioAnalyzeResponse,
   ScenarioCatalogResponse,
   UserResponse,
+  UserUpdatePayload,
 } from '../types'
 
 const BASE = '/api'
@@ -52,6 +53,11 @@ export const api = {
     request<UserResponse>('/users/onboarding', 'users.onboarding', {
       method: 'POST',
       body: JSON.stringify(answers),
+    }),
+  updateProfile: (payload: UserUpdatePayload) =>
+    request<UserResponse>('/users/profile', 'users.update', {
+      method: 'PUT',
+      body: JSON.stringify(payload),
     }),
   getPortfolioSummary: () => request<PortfolioSummaryResponse>('/portfolio/summary', 'portfolio.summary'),
   getHoldings: () => request<HoldingsResponse>('/holdings/', 'holdings.list'),
